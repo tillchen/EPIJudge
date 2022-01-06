@@ -2,8 +2,12 @@ from test_framework import generic_test
 
 
 def parity(x: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    # 1 if the number of 1 bits is odd. Else 0.
+    result = 0
+    while x:
+        result ^= 1
+        x &=  (x - 1) # Remove the lowest set bit.
+    return result
 
 
 if __name__ == '__main__':
