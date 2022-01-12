@@ -8,9 +8,10 @@ Rect = collections.namedtuple('Rect', ('x', 'y', 'width', 'height'))
 def are_rectangles_intersected(r1: Rect, r2: Rect) -> bool:
     return r1.x <= r2.x + r2.width and r2.x <= r1.x + r1.width and r1.y <= r2.y + r2.height and r2.y <= r1.y + r1.height
 
+
 def intersect_rectangle(r1: Rect, r2: Rect) -> Rect:
     if not are_rectangles_intersected(r1, r2):
-        return (0, 0, -1, -1)
+        return Rect(0, 0, -1, -1)
     return Rect(
         max(r1.x, r2.x),
         max(r1.y, r2.y),
