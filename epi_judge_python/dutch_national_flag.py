@@ -7,10 +7,18 @@ from test_framework.test_utils import enable_executor_hook
 
 RED, WHITE, BLUE = range(3)
 
+def dutch_flag_partition_0(pivot_index: int, A: List[int]) -> None:
+    # Reorder the list so that elements smaller than A[pivot_index] come first, then equal, then greater.
+    A.sort()
+
+def dutch_flag_partition_1(pivot_index: int, A: List[int]) -> None:
+    smaller = [x for x in A if x < A[pivot_index]]
+    equal = [x for x in A if x == A[pivot_index]]
+    greater = [x for x in A if x > A[pivot_index]]
+    A[:] = smaller + equal + greater
 
 def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
-    # TODO - you fill in here.
-    return
+
 
 
 @enable_executor_hook
