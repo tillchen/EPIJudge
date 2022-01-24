@@ -12,10 +12,10 @@ def multiply(num1: List[int], num2: List[int]) -> List[int]:
             result[i + j + 1] += num1[i] * num2[j]
             result[i + j] += result[i + j + 1] // 10
             result[i + j + 1] %= 10
-    while result and result[0] == 0:
-        result.pop(0)
-    if not result:
+    first_non_zero_index = next((i for i, x in enumerate(result) if x != 0), None)
+    if first_non_zero_index == None:
         return [0]
+    result = result[first_non_zero_index:]
     result[0] *= sign
     return result
 
