@@ -5,10 +5,9 @@ from test_framework import generic_test
 from test_framework.test_failure import PropertyName, TestFailure
 from test_framework.test_utils import enable_executor_hook
 
-
 def rearrange(A: List[int]) -> None:
-    # TODO - you fill in here.
-    return
+    for i in range(len(A)):
+        A[i:i + 2] = sorted(A[i:i + 2], reverse=i % 2)
 
 
 @enable_executor_hook
