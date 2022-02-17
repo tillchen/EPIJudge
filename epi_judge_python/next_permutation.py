@@ -1,3 +1,4 @@
+from tracemalloc import start
 from typing import List
 
 from test_framework import generic_test
@@ -10,13 +11,13 @@ def next_permutation(perm: List[int]) -> List[int]:
         if perm[i] < perm[i + 1]:
             turning_point = i
             break
-    if not turning_point:
+    if turning_point is None:
         return []
     if turning_point == len(perm) - 1:
         swap_index = turning_point - 1
     else:
         swap_target = min(x for x in perm[turning_point + 1:] if x > perm[turning_point])
-        swap_index = perm.index(swap_target)
+        swap_index = perm.index(swap_target, turning_point+1)
     result = perm[:]
     result[turning_point], result[swap_index] = result[swap_index], result[turning_point]
     result[turning_point + 1:] = sorted(result[turning_point + 1:])
