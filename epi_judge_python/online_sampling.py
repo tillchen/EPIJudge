@@ -7,11 +7,20 @@ from test_framework.random_sequence_checker import (
     compute_combination_idx, run_func_with_retries)
 from test_framework.test_utils import enable_executor_hook
 
+import random
+import itertools
+
 
 # Assumption: there are at least k elements in the stream.
 def online_random_sample(stream: Iterator[int], k: int) -> List[int]:
-    # TODO - you fill in here.
-    return []
+    result = list(itertools.islice(stream, k))
+    num_of_elements = k
+    for x in stream:
+        num_of_elements += 1
+        random_index = random.randrange(num_of_elements)
+        if random_index < k:
+            result[random_index] = x
+    return result
 
 
 @enable_executor_hook
