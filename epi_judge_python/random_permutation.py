@@ -9,9 +9,15 @@ from test_framework.random_sequence_checker import (
 from test_framework.test_utils import enable_executor_hook
 
 from random import sample
+from random import shuffle
+
+def compute_random_permutation_0(n: int) -> List[int]:
+    return sample(range(n), n)
 
 def compute_random_permutation(n: int) -> List[int]:
-    return sample(range(n), n)
+    result = list(range(n))
+    shuffle(result)
+    return result
 
 
 @enable_executor_hook
