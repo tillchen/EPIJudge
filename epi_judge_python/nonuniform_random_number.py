@@ -9,6 +9,7 @@ from test_framework.test_utils import enable_executor_hook
 
 import itertools
 import random
+import bisect
 
 def nonuniform_random_number_generation(
     values: List[int], probabilities: List[float]
@@ -19,6 +20,12 @@ def nonuniform_random_number_generation(
         if random_index < probability_interval:
             return values[i]
 
+def nonuniform_random_number_generation(
+    values: List[int], probabilities: List[float]
+) -> int:
+    probability_intervals = list(itertools.accumulate(probabilities))
+    random_index = bisect.bisect(probability_intervals, random.random())
+    return values[random_index]
 
 @enable_executor_hook
 def nonuniform_random_number_generation_wrapper(executor, values,
