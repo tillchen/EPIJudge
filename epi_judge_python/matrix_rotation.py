@@ -3,9 +3,10 @@ from typing import List
 from test_framework import generic_test
 
 
+# [[1,2,3],[4,5,6],[7,8,9]] -> [[7,4,1],[8,5,2],[9,6,3]]
 def rotate_matrix(square_matrix: List[List[int]]) -> None:
-    # TODO - you fill in here.
-    return
+    square_matrix[:] = list(map(list, zip(*square_matrix)))
+    square_matrix[:] = [row[::-1] for row in square_matrix]
 
 
 def rotate_matrix_wrapper(square_matrix):
