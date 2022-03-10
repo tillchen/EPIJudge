@@ -1,8 +1,11 @@
 from test_framework import generic_test
 
 
-def is_palindromic(s: str) -> bool:
+def is_palindromic_0(s: str) -> bool:
     return s == s[::-1]
+
+def is_palindromic(s: str) -> bool:
+    return all(s[i] == s[~i] for i in range(len(s) // 2))
 
 
 if __name__ == '__main__':
