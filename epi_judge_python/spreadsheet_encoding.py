@@ -1,9 +1,9 @@
 from test_framework import generic_test
+from functools import reduce
 
-
+# AA -> 27, AB -> 28
 def ss_decode_col_id(col: str) -> int:
-    # TODO - you fill in here.
-    return 0
+    return reduce(lambda a, b: a * 26 + ord(b) - ord('A') + 1, col, 0)
 
 
 if __name__ == '__main__':
