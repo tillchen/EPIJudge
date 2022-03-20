@@ -1,9 +1,12 @@
 from test_framework import generic_test
+from itertools import groupby
 
 
 def look_and_say(n: int) -> str:
-    # TODO - you fill in here.
-    return ''
+    s = '1'
+    for _ in range(n - 1):
+        s = ''.join(str(len(list(value))) + key for key, value in groupby(s))
+    return s
 
 
 if __name__ == '__main__':
