@@ -17,8 +17,22 @@ def decoding(s: str) -> str:
 
 
 # aaaabcccaa -> 4a1b3c2a
-def encoding(s: str) -> str:
+def encoding_0(s: str) -> str:
     return ''.join([f'{len(list(v))}{k}' for k, v in groupby(s)])
+
+def encoding(s: str) -> str:
+    result = ''
+    i = 0
+    while i + 1 < len(s):
+        local_count = 1
+        while i + 1 < len(s) and s[i] == s[i + 1]:
+            local_count += 1
+            i += 1
+        result += f'{local_count}{s[i]}'
+        i += 1
+    if len(s) == 1 or s[-2] != s[-1]:
+        result += f'1{s[-1]}'
+    return result
 
 
 def rle_tester(encoded, decoded):
