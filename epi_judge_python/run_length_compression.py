@@ -20,7 +20,7 @@ def decoding(s: str) -> str:
 def encoding_0(s: str) -> str:
     return ''.join([f'{len(list(v))}{k}' for k, v in groupby(s)])
 
-def encoding(s: str) -> str:
+def encoding_1(s: str) -> str:
     result = ''
     i = 0
     while i + 1 < len(s):
@@ -34,6 +34,16 @@ def encoding(s: str) -> str:
         result += f'1{s[-1]}'
     return result
 
+def encoding(s: str) -> str:
+    result = ''
+    count = 1
+    for i in range(1, len(s) + 1):
+        if i == len(s) or s[i - 1] != s[i]:
+            result += f'{count}{s[i - 1]}'
+            count = 1
+        else:
+            count += 1
+    return result
 
 def rle_tester(encoded, decoded):
     if decoding(encoded) != decoded:
