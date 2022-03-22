@@ -1,15 +1,24 @@
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
+from itertools import groupby
 
 
+# 4a1b3c2a -> aaaabcccaa
 def decoding(s: str) -> str:
-    # TODO - you fill in here.
-    return ''
+    i, j = 0, 1
+    result = ''
+    while i < len(s) and j < len(s):
+        while j < len(s) and s[j].isdecimal():
+            j += 1
+        result += ''.join([s[j]] * int(s[i:j]))
+        i = j + 1
+        j = i + 1
+    return result
 
 
+# aaaabcccaa -> 4a1b3c2a
 def encoding(s: str) -> str:
-    # TODO - you fill in here.
-    return ''
+    return ''.join([f'{len(list(v))}{k}' for k, v in groupby(s)])
 
 
 def rle_tester(encoded, decoded):
