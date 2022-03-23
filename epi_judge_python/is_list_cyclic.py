@@ -9,14 +9,16 @@ from test_framework.test_utils import enable_executor_hook
 
 # Return None if no cycle, else return the start of the cycle.
 def has_cycle(head: ListNode) -> Optional[ListNode]:
-    if not head:
-        return None
-    slow, fast = head, head.next
+    slow, fast = head, head
     while fast and fast.next and slow:
-        if slow is fast:
-            return slow
         slow = slow.next
         fast = fast.next.next
+        if slow is fast:
+            slow = head
+            while slow is not fast:
+                slow = slow.next
+                fast = fast.next
+            return slow
     return None
 
 
