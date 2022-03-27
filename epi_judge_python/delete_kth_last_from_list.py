@@ -1,11 +1,11 @@
-from typing import Optional
+from typing import List, Optional
 
 from list_node import ListNode
 from test_framework import generic_test
 
 
 # Assumes L has at least k nodes, deletes the k-th last node in L.
-def remove_kth_last(L: ListNode, k: int) -> Optional[ListNode]:
+def remove_kth_last_0(L: ListNode, k: int) -> Optional[ListNode]:
     def get_length(L: ListNode) -> int:
         result = 0
         while L:
@@ -24,6 +24,18 @@ def remove_kth_last(L: ListNode, k: int) -> Optional[ListNode]:
     L.next = L.next.next if L.next else None
     return result
 
+
+def remove_kth_last(L: ListNode, k: int) -> Optional[ListNode]:
+    first = L
+    for _ in range(k):
+        first = first.next
+    head = ListNode(next=L)
+    second = head
+    while first:
+        first = first.next
+        second = second.next
+    second.next = second.next.next if second.next else None
+    return head.next
 
 if __name__ == '__main__':
     exit(
