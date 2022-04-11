@@ -8,7 +8,7 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
 
-def lca(node0: BinaryTreeNode,
+def lca_0(node0: BinaryTreeNode,
         node1: BinaryTreeNode) -> Optional[BinaryTreeNode]:
     set_of_nodes = set()
     while node0:
@@ -19,6 +19,27 @@ def lca(node0: BinaryTreeNode,
             return node1
         node1 = node1.parent
     return None
+
+def lca(node0: BinaryTreeNode, node1: BinaryTreeNode) -> Optional[BinaryTreeNode]:
+    def get_depth(node: BinaryTreeNode) -> int:
+        depth = 0
+        while node:
+            depth += 1
+            node = node.parent
+        return depth
+
+    depth0, depth1 = get_depth(node0), get_depth(node1)
+    # Let node0 be the deeper one.
+    if depth1 > depth0:
+        node0, node1 = node1, node0
+        depth0, depth1 = depth1, depth0
+    while depth1 < depth0:
+        node0 = node0.parent
+        depth0 -= 1
+    while node0 is not node1:
+        node0 = node0.parent
+        node1 = node1.parent
+    return node0
 
 
 @enable_executor_hook
