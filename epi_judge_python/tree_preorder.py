@@ -7,15 +7,14 @@ from collections import deque
 
 def preorder_traversal(tree: BinaryTreeNode) -> List[int]:
     stack = deque()
+    stack.append(tree)
     result = []
-    while stack or tree:
-        if tree:
-            result.append(tree.data)
-            stack.append(tree)
-            tree = tree.left
-        else:
-            tree = stack.pop()
-            tree = tree.right
+    while stack:
+        current = stack.pop()
+        if current:
+            result.append(current.data)
+            stack.append(current.right)
+            stack.append(current.left)
     return result
 
 
