@@ -5,6 +5,7 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
+from typing import List
 
 class BinaryTreeNode:
     def __init__(self, data=None, left=None, right=None, size=None):
@@ -16,8 +17,15 @@ class BinaryTreeNode:
 
 def find_kth_node_binary_tree(tree: BinaryTreeNode,
                               k: int) -> Optional[BinaryTreeNode]:
-    # TODO - you fill in here.
-    return None
+    l = []
+    def helper(tree: BinaryTreeNode, l: List[BinaryTreeNode]):
+        if tree:
+            helper(tree.left, l)
+            l.append(tree)
+            helper(tree.right, l)
+
+    helper(tree, l)
+    return l[k - 1]
 
 
 @enable_executor_hook
