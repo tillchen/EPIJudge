@@ -14,7 +14,7 @@ class BinaryTreeNode:
 
 
 # BFS
-def construct_right_sibling(tree: BinaryTreeNode) -> None:
+def construct_right_sibling_0(tree: BinaryTreeNode) -> None:
     if not tree:
         return
     queue = deque()
@@ -30,6 +30,18 @@ def construct_right_sibling(tree: BinaryTreeNode) -> None:
                 queue.append(current.right)
         for i in range(len(level) - 1):
             level[i].next = level[i + 1]
+
+def construct_right_sibling(tree: BinaryTreeNode) -> None:
+    def helper(node: BinaryTreeNode):
+        while node and node.left:
+            node.left.next = node.right
+            if node.next:
+                node.right.next = node.next.left
+            node = node.next
+
+    while tree and tree.left:
+        helper(tree)
+        tree = tree.left
 
 
 def traverse_next(node):
