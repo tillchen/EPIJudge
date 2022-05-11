@@ -8,11 +8,16 @@ from test_framework.test_utils import enable_executor_hook
 from collections import deque
 
 def create_list_of_leaves(tree: BinaryTreeNode) -> List[BinaryTreeNode]:
-    if not tree:
-        return []
-    if not tree.left and not tree.right:
-        return [tree]
-    return create_list_of_leaves(tree.left) + create_list_of_leaves(tree.right)
+    result = []
+    def helper(tree: BinaryTreeNode, result: List[BinaryTreeNode]):
+        if not tree:
+            return
+        if not tree.left and not tree.right:
+            result.append(tree)
+        helper(tree.left, result)
+        helper(tree.right, result)
+    helper(tree, result)
+    return result
 
 
 @enable_executor_hook

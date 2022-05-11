@@ -5,10 +5,18 @@ from binary_tree_node import BinaryTreeNode
 from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
+from typing import Iterator
+
 
 def reconstruct_preorder(preorder: List[int]) -> BinaryTreeNode:
-    # TODO - you fill in here.
-    return BinaryTreeNode()
+    def helper(preorder_iter: Iterator[int]) -> BinaryTreeNode:
+        current = next(preorder_iter)
+        if not current:
+            return
+        left_subtree = helper(preorder_iter)
+        right_subtree = helper(preorder_iter)
+        return BinaryTreeNode(current, left_subtree, right_subtree)
+    return helper(iter(preorder))
 
 
 @enable_executor_hook
