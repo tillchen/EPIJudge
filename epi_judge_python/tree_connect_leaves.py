@@ -7,7 +7,7 @@ from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 from collections import deque
 
-def create_list_of_leaves(tree: BinaryTreeNode) -> List[BinaryTreeNode]:
+def create_list_of_leaves_0(tree: BinaryTreeNode) -> List[BinaryTreeNode]:
     result = []
     def helper(tree: BinaryTreeNode, result: List[BinaryTreeNode]):
         if not tree:
@@ -19,6 +19,12 @@ def create_list_of_leaves(tree: BinaryTreeNode) -> List[BinaryTreeNode]:
     helper(tree, result)
     return result
 
+def create_list_of_leaves(tree: BinaryTreeNode) -> List[BinaryTreeNode]:
+    if not tree:
+        return []
+    if not tree.left and not tree.right:
+        return [tree]
+    return create_list_of_leaves(tree.left) + create_list_of_leaves(tree.right)
 
 @enable_executor_hook
 def create_list_of_leaves_wrapper(executor, tree):
