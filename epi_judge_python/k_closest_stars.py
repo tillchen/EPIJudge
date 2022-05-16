@@ -29,12 +29,12 @@ class Star:
 
 
 def find_closest_k_stars(stars: Iterator[Star], k: int) -> List[Star]:
-    min_heap = []
+    max_heap = []
     for star in islice(stars, k):
-        heapq.heappush(min_heap, (-star.distance, star))
+        heapq.heappush(max_heap, (-star.distance, star))
     for star in stars:
-        heapq.heappushpop(min_heap, (-star.distance, star))
-    return [star for _, star in min_heap]
+        heapq.heappushpop(max_heap, (-star.distance, star))
+    return [star for _, star in max_heap]
 
 
 def comp(expected_output, output):
