@@ -3,7 +3,7 @@ from test_framework import generic_test
 from collections import Counter
 
 def can_form_palindrome(s: str) -> bool:
-    return len([x for x in Counter(s).values() if x % 2 == 1]) in (0, 1)
+    return len([x for x in Counter(s).values() if x % 2 == 1]) < 2
 
 
 if __name__ == '__main__':
