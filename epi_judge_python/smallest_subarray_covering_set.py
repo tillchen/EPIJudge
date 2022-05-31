@@ -9,11 +9,17 @@ from test_framework.test_utils import enable_executor_hook
 Subarray = collections.namedtuple('Subarray', ('start', 'end'))
 
 
-def find_smallest_subarray_covering_set(paragraph: List[str],
-                                        keywords: Set[str]) -> Subarray:
-    # TODO - you fill in here.
-    return Subarray(0, 0)
-
+def find_smallest_subarray_covering_set(paragraph: List[str], keywords: Set[str]) -> Subarray:
+    keywords_to_indices = {}
+    min_length = float('inf')
+    result = Subarray(0, 0)
+    for i, keyword in enumerate(paragraph):
+        if keyword in keywords:
+            keywords_to_indices[keyword] = i
+            if keywords_to_indices.keys() == keywords and (new_min_length := i - min(keywords_to_indices.values()) + 1) < min_length:
+                min_length = new_min_length
+                result = Subarray(min(keywords_to_indices.values()), i)
+    return result
 
 @enable_executor_hook
 def find_smallest_subarray_covering_set_wrapper(executor, paragraph, keywords):
