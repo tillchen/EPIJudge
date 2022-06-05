@@ -7,11 +7,20 @@ from test_framework.test_utils import enable_executor_hook
 
 # Event is a tuple (start_time, end_time)
 Event = collections.namedtuple('Event', ('start', 'finish'))
+EndPoint = collections.namedtuple('EndPoint', ('time', 'is_start'))
 
 
 def find_max_simultaneous_events(A: List[Event]) -> int:
-    # TODO - you fill in here.
-    return 0
+    endpoints = [EndPoint(x.start, True) for x in A] + [EndPoint(x.finish, False) for x in A]
+    endpoints.sort(key=lambda x: (x.time, not x.is_start))
+    result, current_max = 0, 0
+    for endpoint in endpoints:
+        if endpoint.is_start:
+            current_max += 1
+            result = max(result, current_max)
+        else:
+            current_max -= 1
+    return result
 
 
 @enable_executor_hook
