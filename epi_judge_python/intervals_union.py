@@ -11,9 +11,16 @@ Interval = collections.namedtuple('Interval', ('left', 'right'))
 
 
 def union_of_intervals(intervals: List[Interval]) -> List[Interval]:
-    # TODO - you fill in here.
-    return []
-
+    intervals.sort(key=lambda x: x.left)
+    result = []
+    current_interval = intervals[0]
+    for interval in intervals[1:]:
+        if interval.left <= current_interval.right:
+            current_interval.right = interval.right
+        else:
+            result.append(current_interval)
+            current_interval = interval
+    return result
 
 @enable_executor_hook
 def union_of_intervals_wrapper(executor, intervals):

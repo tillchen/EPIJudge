@@ -9,10 +9,18 @@ from test_framework.test_utils import enable_executor_hook
 Interval = collections.namedtuple('Interval', ('left', 'right'))
 
 
-def add_interval(disjoint_intervals: List[Interval],
-                 new_interval: Interval) -> List[Interval]:
-    # TODO - you fill in here.
-    return []
+def add_interval(disjoint_intervals: List[Interval], new_interval: Interval) -> List[Interval]:
+    result = []
+    i = 0
+    while (i < len(disjoint_intervals) and new_interval.left > disjoint_intervals[i].right):
+        result.append(disjoint_intervals[i])
+        i += 1
+    while (i < len(disjoint_intervals) and new_interval.right >= disjoint_intervals[i].left):
+        new_interval = Interval(min(new_interval.left, disjoint_intervals[i].left), max(new_interval.right, disjoint_intervals[i].right))
+        i += 1
+    result.append(new_interval)
+    result += disjoint_intervals[i:]
+    return result
 
 
 @enable_executor_hook
