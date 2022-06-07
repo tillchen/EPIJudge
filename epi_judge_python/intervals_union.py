@@ -9,17 +9,24 @@ Endpoint = collections.namedtuple('Endpoint', ('is_closed', 'val'))
 
 Interval = collections.namedtuple('Interval', ('left', 'right'))
 
-
 def union_of_intervals(intervals: List[Interval]) -> List[Interval]:
-    intervals.sort(key=lambda x: x.left)
-    result = []
-    current_interval = intervals[0]
-    for interval in intervals[1:]:
-        if interval.left <= current_interval.right:
-            current_interval.right = interval.right
+
+    # Empty input.
+    if not intervals:
+        return []
+
+    # Sort intervals according to left endpoints of intervals.
+    intervals.sort(key=lambda i: (i.left.val, not i.left.is_closed))
+    result = [intervals[0]]
+    for i in intervals:
+        if (i.left.val < result[-1].right.val or
+                          (i.left.val == result[-1].right.val and
+                           (i.left.is_closed or result[-1].right.is_closed))):
+            if (i.right.val > result[-1].right.val or
+                (i.right.val == result[-1].right.val and i.right.is_closed)):
+                result[-1] = Interval(result[-1].left, i.right)
         else:
-            result.append(current_interval)
-            current_interval = interval
+            result.append(i)
     return result
 
 @enable_executor_hook
