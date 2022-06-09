@@ -6,12 +6,20 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
 
+from collections import defaultdict
+import itertools
+
 Person = collections.namedtuple('Person', ('age', 'name'))
 
 
-def group_by_age(people: List[Person]) -> None:
-    # TODO - you fill in here.
-    return
+def group_by_age_0(people: List[Person]) -> None:
+    people.sort(key=lambda x: x.age)
+
+def group_by_age(people: List[Person]):
+    age_to_person = defaultdict(list)
+    for person in people:
+        age_to_person[person.age].append(person)
+    people[:] = list(itertools.chain.from_iterable(age_to_person.values()))
 
 
 @enable_executor_hook
