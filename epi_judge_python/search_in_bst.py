@@ -3,9 +3,21 @@ from typing import Optional
 from bst_node import BstNode
 from test_framework import generic_test
 
+def search_bst_0(tree: BstNode, key: int) -> Optional[BstNode]:
+    if not tree or key == tree.data:
+        return tree
+    if key < tree.data:
+        return search_bst_0(tree.left, key)
+    return search_bst_0(tree.right, key)
 
 def search_bst(tree: BstNode, key: int) -> Optional[BstNode]:
-    # TODO - you fill in here.
+    while tree:
+        if key < tree.data:
+            tree = tree.left
+        elif key > tree.data:
+            tree = tree.right
+        else:
+            return tree
     return None
 
 
