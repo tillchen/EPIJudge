@@ -16,7 +16,7 @@ class ABSqrt2:
         return self.val == other.val
 
 
-def generate_first_k_a_b_sqrt2(k: int) -> List[float]:
+def generate_first_k_a_b_sqrt2_0(k: int) -> List[float]:
     candidates = bintrees.RBTree()
     candidates.insert(ABSqrt2(0, 0), None)
     result = []
@@ -26,6 +26,19 @@ def generate_first_k_a_b_sqrt2(k: int) -> List[float]:
         candidates.insert(ABSqrt2(current.a + 1, current.b), None)
         candidates.insert(ABSqrt2(current.a, current.b + 1), None)
     return result
+
+def generate_first_k_a_b_sqrt2(k: int) -> List[float]:
+    candidates = [ABSqrt2(0, 0)]
+    i, j = 0, 0
+    for _ in range(1, k):
+        candidate_i_plus_1 = ABSqrt2(candidates[i].a + 1, candidates[i].b)
+        candidate_j_plus_sqrt2 = ABSqrt2(candidates[j].a, candidates[j].b + 1)
+        candidates.append(min(candidate_i_plus_1, candidate_j_plus_sqrt2))
+        if candidates[-1] == candidate_i_plus_1:
+            i += 1
+        if candidates[-1] == candidate_j_plus_sqrt2:
+            j += 1
+    return [x.val for x in candidates]
 
 
 if __name__ == '__main__':
