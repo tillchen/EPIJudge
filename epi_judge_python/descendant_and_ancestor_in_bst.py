@@ -19,9 +19,34 @@ def search_for_node(root: BstNode, target: BstNode) -> bool:
     return False
 
 
-def pair_includes_ancestor_and_descendant_of_m(possible_anc_or_desc_0: BstNode, possible_anc_or_desc_1: BstNode, middle: BstNode) -> bool:
+def pair_includes_ancestor_and_descendant_of_m_0(possible_anc_or_desc_0: BstNode, possible_anc_or_desc_1: BstNode, middle: BstNode) -> bool:
     return search_for_node(possible_anc_or_desc_0, middle) and search_for_node(middle, possible_anc_or_desc_1) or search_for_node(possible_anc_or_desc_1, middle) and search_for_node(middle, possible_anc_or_desc_0)
 
+def pair_includes_ancestor_and_descendant_of_m(possible_anc_or_desc_0: BstNode, possible_anc_or_desc_1: BstNode, middle: BstNode) -> bool:
+    search_0, search_1 = possible_anc_or_desc_0, possible_anc_or_desc_1
+    # Interleaved search
+    while (
+        search_0 is not possible_anc_or_desc_1 and search_0 is not middle
+        and search_1 is not possible_anc_or_desc_0 and search_1 is not middle
+        and (search_0 or search_1)
+    ):
+        if search_0:
+            search_0 = (search_0.left if search_0.data > middle.data else search_0.right)
+        if search_1:
+            search_1 = (search_1.left if search_1.data > middle.data else search_1.right)
+    if (
+        search_0 is not middle and search_1 is not middle
+        or search_0 is possible_anc_or_desc_1
+        or search_1 is possible_anc_or_desc_0
+    ):
+        return False
+
+    def search_target(root: BstNode, target: BstNode) -> bool:
+        while root and root is not target:
+            root = root.left if root.data > target.data else root.right
+        return root is target
+
+    return search_target(middle, possible_anc_or_desc_0 if middle is search_1 else possible_anc_or_desc_1)
 
 @enable_executor_hook
 def pair_includes_ancestor_and_descendant_of_m_wrapper(executor, tree,
