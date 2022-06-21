@@ -4,8 +4,18 @@ from test_framework import generic_test
 
 
 def n_queens(n: int) -> List[List[int]]:
-    # TODO - you fill in here.
-    return []
+    result = []
+    current_column_placement = [0] * n
+    def helper(row: int):
+        if row == n:
+            result.append(list(current_column_placement))
+            return
+        for column in range(n):
+            if all(abs(c - column) not in (0, row - i) for i, c in enumerate(current_column_placement[:row])):
+                current_column_placement[row] = column
+                helper(row + 1)
+    helper(0)
+    return result
 
 
 def comp(a, b):
