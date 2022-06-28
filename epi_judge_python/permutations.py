@@ -4,11 +4,13 @@ from test_framework import generic_test, test_utils
 
 import itertools
 
+from next_permutation import next_permutation
+
 
 def permutations_0(A: List[int]) -> List[List[int]]:
     return [list(x) for x in itertools.permutations(A)]
 
-def permutations(A: List[int]) -> List[List[int]]:
+def permutations_1(A: List[int]) -> List[List[int]]:
     result = []
     def helper(i: int):
         if i == len(A) - 1:
@@ -19,6 +21,15 @@ def permutations(A: List[int]) -> List[List[int]]:
             helper(i + 1)
             A[j], A[i] = A[i], A[j]
     helper(0)
+    return result
+
+def permutations(A: List[int]) -> List[List[int]]:
+    result = []
+    while True:
+        result.append(A.copy())
+        A = next_permutation(A)
+        if not A:
+            break
     return result
 
 if __name__ == '__main__':
