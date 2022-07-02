@@ -2,10 +2,11 @@ from typing import List
 
 from test_framework import generic_test, test_utils
 
+import itertools
+
 
 def combinations(n: int, k: int) -> List[List[int]]:
-    # TODO - you fill in here.
-    return []
+    return list(map(list, itertools.combinations(range(1, n + 1), k)))
 
 
 if __name__ == '__main__':
