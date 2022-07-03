@@ -4,8 +4,17 @@ from test_framework import generic_test
 
 
 def palindrome_decompositions(text: str) -> List[List[str]]:
-    # TODO - you fill in here.
-    return []
+    result = []
+    def helper(offset: int, partition: List[str]):
+        if offset == len(text):
+            result.append(partition)
+            return
+        for i in range(offset + 1, len(text) + 1):
+            prefix = text[offset:i]
+            if prefix == prefix[::-1]:
+                helper(i, partition + [prefix])
+    helper(0, [])
+    return result
 
 
 def comp(a, b):
