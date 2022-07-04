@@ -1,9 +1,11 @@
 from test_framework import generic_test
+from functools import lru_cache
 
-
+@lru_cache
 def number_of_ways(n: int, m: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    if n == 1 or m == 1:
+        return 1
+    return number_of_ways(n - 1, m) + number_of_ways(n, m - 1)
 
 
 if __name__ == '__main__':
