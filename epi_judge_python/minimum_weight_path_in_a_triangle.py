@@ -4,8 +4,16 @@ from test_framework import generic_test
 
 
 def minimum_path_weight(triangle: List[List[int]]) -> int:
-    # TODO - you fill in here.
-    return 0
+    memo = {}
+    def helper(i: int, j: int) -> int:
+        if i == len(triangle):
+            return 0
+        if j == i + 1:
+            return 0
+        if (i, j) not in memo:
+            memo[(i, j)] = triangle[i][j] + min(helper(i + 1, j), helper(i + 1, j + 1))
+        return memo[(i, j)]
+    return helper(0, 0)
 
 
 if __name__ == '__main__':
