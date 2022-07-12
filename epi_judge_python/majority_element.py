@@ -1,11 +1,10 @@
 from typing import Iterator
 
 from test_framework import generic_test
-
+from collections import Counter
 
 def majority_search(stream: Iterator[str]) -> str:
-    # TODO - you fill in here.
-    return ''
+    return Counter(stream).most_common(1)[0][0]
 
 
 def majority_search_wrapper(stream):
