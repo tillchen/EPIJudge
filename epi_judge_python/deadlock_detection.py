@@ -6,20 +6,23 @@ from test_framework.test_utils import enable_executor_hook
 
 
 class GraphVertex:
+
+    WHITE, GRAY, BLACK = range(3)
+
     def __init__(self) -> None:
         self.edges: List['GraphVertex'] = []
-        self.visited = False
+        self.color = GraphVertex.WHITE
 
 def is_deadlocked(graph: List[GraphVertex]) -> bool:
     def dfs(vertex: GraphVertex) -> bool:
-        if vertex.visited:
+        if vertex.color == GraphVertex.GRAY:
             return True
-        vertex.visited = True
-        if any(dfs(vertex) for vertex in vertex.edges):
+        vertex.color = GraphVertex.GRAY
+        if any(vertex.color != GraphVertex.BLACK and dfs(vertex) for vertex in vertex.edges):
             return True
-        vertex.visited = False
+        vertex.color = GraphVertex.BLACK
         return False
-    return any(dfs(vertex) for vertex in graph)
+    return any(vertex.color == GraphVertex.WHITE and dfs(vertex) for vertex in graph)
 
 
 @enable_executor_hook
