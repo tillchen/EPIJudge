@@ -4,8 +4,15 @@ from test_framework import generic_test
 
 
 def flip_color(x: int, y: int, image: List[List[bool]]) -> None:
-    # TODO - you fill in here.
-    return
+    def helper(x: int, y: int, b: bool):
+        if not 0 <= x < len(image) or not 0 <= y < len(image[0]) or image[x][y] is not b:
+            return
+        image[x][y] = not b
+        helper(x - 1, y, b)
+        helper(x + 1, y, b)
+        helper(x, y - 1, b)
+        helper(x, y + 1, b)
+    helper(x, y, image[x][y])
 
 
 def flip_color_wrapper(x, y, image):
