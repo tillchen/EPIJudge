@@ -24,7 +24,7 @@ def search_maze(maze: List[List[int]], s: Coordinate, e: Coordinate) -> List[Coo
         if any((helper(Coordinate(current.x - 1, current.y)), helper(Coordinate(current.x + 1, current.y)),
             helper(Coordinate(current.x, current.y - 1)), helper(Coordinate(current.x, current.y + 1)))):
             return True
-        del result[-1]
+        result.pop()
         return False
     if not helper(s):
         return []
