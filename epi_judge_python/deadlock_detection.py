@@ -8,11 +8,18 @@ from test_framework.test_utils import enable_executor_hook
 class GraphVertex:
     def __init__(self) -> None:
         self.edges: List['GraphVertex'] = []
-
+        self.visited = False
 
 def is_deadlocked(graph: List[GraphVertex]) -> bool:
-    # TODO - you fill in here.
-    return True
+    def dfs(vertex: GraphVertex) -> bool:
+        if vertex.visited:
+            return True
+        vertex.visited = True
+        if any(dfs(vertex) for vertex in vertex.edges):
+            return True
+        vertex.visited = False
+        return False
+    return any(dfs(vertex) for vertex in graph)
 
 
 @enable_executor_hook
