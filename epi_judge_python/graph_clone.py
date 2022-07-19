@@ -4,6 +4,7 @@ from typing import List
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
+from collections import deque
 
 class GraphVertex:
     def __init__(self, label: int) -> None:
@@ -11,7 +12,7 @@ class GraphVertex:
         self.edges: List['GraphVertex'] = []
 
 
-def clone_graph(graph: GraphVertex) -> GraphVertex:
+def clone_graph_0(graph: GraphVertex) -> GraphVertex:
     original_to_clone = {}
     def dfs(vertex: GraphVertex) -> GraphVertex:
         if vertex in original_to_clone:
@@ -24,6 +25,22 @@ def clone_graph(graph: GraphVertex) -> GraphVertex:
 
     return dfs(graph)
 
+
+def clone_graph(graph: GraphVertex) -> GraphVertex:
+    if not graph:
+        return None
+    queue = deque([graph])
+    original_to_clone = {
+        graph: GraphVertex(graph.label)
+    }
+    while queue:
+        current = queue.popleft()
+        for vertex in current.edges:
+            if vertex not in original_to_clone:
+                original_to_clone[vertex] = GraphVertex(vertex.label)
+                queue.append(vertex)
+            original_to_clone[current].edges.append(original_to_clone[vertex])
+    return original_to_clone[graph]
 
 def copy_labels(edges):
     return [e.label for e in edges]
