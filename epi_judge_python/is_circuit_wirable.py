@@ -4,6 +4,7 @@ from typing import List
 from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 
+from collections import deque
 
 class GraphVertex:
     def __init__(self) -> None:
@@ -12,8 +13,20 @@ class GraphVertex:
 
 
 def is_any_placement_feasible(graph: List[GraphVertex]) -> bool:
-    # TODO - you fill in here.
-    return True
+    def bfs(v: GraphVertex):
+        queue = deque([v])
+        v.d = 0
+        while queue:
+            current = queue.popleft()
+            for vertex in current.edges:
+                if vertex.d == -1:
+                    vertex.d = current.d + 1
+                    queue.append(vertex)
+                else:
+                    if vertex.d == current.d:
+                        return False
+        return True
+    return all(bfs(v) for v in graph if v.d == -1)
 
 
 @enable_executor_hook
