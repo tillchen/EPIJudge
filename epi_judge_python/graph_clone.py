@@ -12,8 +12,17 @@ class GraphVertex:
 
 
 def clone_graph(graph: GraphVertex) -> GraphVertex:
-    # TODO - you fill in here.
-    return GraphVertex(0)
+    original_to_clone = {}
+    def dfs(vertex: GraphVertex) -> GraphVertex:
+        if vertex in original_to_clone:
+            return original_to_clone[vertex]
+        clone = GraphVertex(vertex.label)
+        original_to_clone[vertex] = clone
+        for v in vertex.edges:
+            clone.edges.append(dfs(v))
+        return clone
+
+    return dfs(graph)
 
 
 def copy_labels(edges):
