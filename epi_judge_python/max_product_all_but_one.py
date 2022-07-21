@@ -29,7 +29,7 @@ def find_biggest_n_minus_one_product_1(A: List[int]) -> int:
         result = max(result, prefix * suffix)
     return result
 
-def find_biggest_n_minus_one_product(A: List[int]) -> int:
+def find_biggest_n_minus_one_product_2(A: List[int]) -> int:
     suffix_products = list(reversed(list(accumulate(reversed(A), mul))))
     prefix_product = 1
     result = 0
@@ -38,6 +38,28 @@ def find_biggest_n_minus_one_product(A: List[int]) -> int:
         result = max(result, prefix_product * suffix_product)
         prefix_product *= A[i]
     return result
+
+def find_biggest_n_minus_one_product(A: List[int]) -> int:
+    num_of_negatives = 0
+    least_nonnegative_index, greatest_negative_index, least_negative_index = None, None, None
+    for i, x in enumerate(A):
+        if x < 0:
+            num_of_negatives += 1
+            if greatest_negative_index is None or x > A[greatest_negative_index]:
+                greatest_negative_index = i
+            if least_negative_index is None or x < A[least_negative_index]:
+                least_negative_index = i
+        else:
+            if least_nonnegative_index is None or x < A[least_nonnegative_index]:
+                least_nonnegative_index = i
+    if num_of_negatives % 2 == 1:
+        index_to_skip = greatest_negative_index
+    else:
+        if least_nonnegative_index is not None:
+            index_to_skip = least_nonnegative_index
+        else:
+            index_to_skip = least_negative_index
+    return reduce(mul, (x for i, x in enumerate(A) if i != index_to_skip), 1)
 
 if __name__ == '__main__':
     exit(
