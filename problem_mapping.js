@@ -2678,7 +2678,7 @@ problem_mapping = {
                 "total": 30
             },
             "Python: left_right_justify_text.py": {
-                "passed": 0,
+                "passed": 30,
                 "total": 30
             }
         },
