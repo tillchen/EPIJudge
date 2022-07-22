@@ -2664,7 +2664,7 @@ problem_mapping = {
                 "total": 201
             },
             "Python: rook_attack.py": {
-                "passed": 0,
+                "passed": 201,
                 "total": 201
             }
         },
