@@ -6,8 +6,10 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def rotate_array(rotate_amount: int, A: List[int]) -> None:
-    # TODO - you fill in here.
-    return
+    result = [0] * len(A)
+    for i in range(len(A)):
+        result[(i + rotate_amount) % len(A)] = A[i]
+    A[:] = result
 
 
 @enable_executor_hook
