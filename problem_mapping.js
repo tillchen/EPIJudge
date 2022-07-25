@@ -2706,7 +2706,7 @@ problem_mapping = {
                 "total": 34
             },
             "Python: copy_posting_list.py": {
-                "passed": 0,
+                "passed": 32,
                 "total": 34
             }
         },
