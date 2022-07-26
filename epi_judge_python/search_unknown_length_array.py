@@ -1,11 +1,11 @@
 from typing import List
 
 from test_framework import generic_test
+from bisect import bisect_left
 
 
 def binary_search_unknown_length(A: List[int], k: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    return bisect_left(A, k) if k in A else -1
 
 
 if __name__ == '__main__':

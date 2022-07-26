@@ -2762,7 +2762,7 @@ problem_mapping = {
                 "total": 206
             },
             "Python: search_unknown_length_array.py": {
-                "passed": 0,
+                "passed": 206,
                 "total": 206
             }
         },
