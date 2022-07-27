@@ -2790,7 +2790,7 @@ problem_mapping = {
                 "total": 503
             },
             "Python: kth_largest_element_in_long_array.py": {
-                "passed": 0,
+                "passed": 503,
                 "total": 503
             }
         },

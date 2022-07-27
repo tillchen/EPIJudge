@@ -4,8 +4,10 @@ from test_framework import generic_test
 
 
 def find_kth_largest_unknown_length(stream: Iterator[int], k: int) -> int:
-    # TODO - you fill in here.
-    return 0
+    A = []
+    for x in stream:
+        A.append(x)
+    return sorted(A, reverse=True)[k - 1]
 
 
 # Pythonic solution that uses library method but costs O(nlogk) time.
