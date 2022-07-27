@@ -2776,7 +2776,7 @@ problem_mapping = {
                 "total": 201
             },
             "Python: kth_largest_element_in_two_sorted_arrays.py": {
-                "passed": 0,
+                "passed": 201,
                 "total": 201
             }
         },
