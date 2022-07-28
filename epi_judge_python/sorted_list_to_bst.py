@@ -10,10 +10,19 @@ from test_framework.test_utils import enable_executor_hook
 # Returns the root of the corresponding BST. The prev and next fields of the
 # list nodes are used as the BST nodes left and right fields, respectively.
 # The length of the list is given.
-def build_bst_from_sorted_doubly_list(l: DoublyListNode,
-                                      n: int) -> Optional[DoublyListNode]:
-    # TODO - you fill in here.
-    return None
+def build_bst_from_sorted_doubly_list(l: DoublyListNode, n: int) -> Optional[DoublyListNode]:
+    head = l
+    def helper(start, end):
+        if start >= end:
+            return None
+        mid = (start + end) // 2
+        left = helper(start, mid)
+        nonlocal head
+        current, head = head, head.next
+        current.prev = left
+        current.next = helper(mid + 1, end)
+        return current
+    return helper(0, n)
 
 
 def compare_vector_and_tree(tree, it):
