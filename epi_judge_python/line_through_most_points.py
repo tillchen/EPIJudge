@@ -5,7 +5,6 @@ from typing import List
 from test_framework import generic_test
 from test_framework.test_utils import enable_executor_hook
 from collections import defaultdict
-from math import gcd
 
 Point = collections.namedtuple('Point', ('x', 'y'))
 
