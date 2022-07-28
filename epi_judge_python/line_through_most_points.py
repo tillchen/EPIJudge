@@ -19,18 +19,11 @@ def find_line_with_most_points(points: List[Point]) -> int:
             if point == points[j]:
                 duplicate_points += 1
             elif point.x == points[j].x:
-                slopes[(1, 0)] += 1
-            elif point.y == points[j].y:
-                slopes[(0, 1)] += 1
+                slopes[float('inf')] += 1
             else:
                 x_diff = point.x - points[j].x
                 y_diff = point.y - points[j].y
-                diff_gcd = gcd(x_diff, y_diff)
-                x_diff /= diff_gcd
-                y_diff /= diff_gcd
-                if x_diff < 0:
-                    x_diff, y_diff = -x_diff, -y_diff
-                slopes[(y_diff, x_diff)] += 1
+                slopes[y_diff / x_diff] += 1
         result = max(result, max(slopes.values(), default=0) + duplicate_points)
     return result
 
