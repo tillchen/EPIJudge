@@ -2818,7 +2818,7 @@ problem_mapping = {
                 "total": 282
             },
             "Python: line_through_most_points.py": {
-                "passed": 0,
+                "passed": 282,
                 "total": 282
             }
         },
