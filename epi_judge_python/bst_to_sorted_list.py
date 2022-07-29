@@ -8,8 +8,23 @@ from test_framework.test_utils import enable_executor_hook
 
 
 def bst_to_doubly_linked_list(tree: BstNode) -> Optional[BstNode]:
-    # TODO - you fill in here.
-    return None
+    if not tree:
+        return None
+    dummy = previous = BstNode()
+    def inorder_traversal(node: BstNode):
+        if not node:
+            return
+        inorder_traversal(node.left)
+        current = BstNode(node.data)
+        nonlocal previous
+        previous.right = current
+        current.left = previous
+        previous = current
+        inorder_traversal(node.right)
+    inorder_traversal(tree)
+    result = dummy.right
+    result.left = None
+    return result
 
 
 @enable_executor_hook

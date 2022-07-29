@@ -2846,7 +2846,7 @@ problem_mapping = {
                 "total": 950
             },
             "Python: bst_to_sorted_list.py": {
-                "passed": 0,
+                "passed": 950,
                 "total": 950
             }
         },
