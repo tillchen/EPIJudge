@@ -2888,7 +2888,7 @@ problem_mapping = {
                 "total": 101
             },
             "Python: insert_operators_in_string.py": {
-                "passed": 0,
+                "passed": 101,
                 "total": 101
             }
         },
