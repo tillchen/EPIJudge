@@ -5,9 +5,10 @@ from bst_node import BstNode
 from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 from test_framework.test_utils import enable_executor_hook
+from collections import namedtuple
 
 
-def bst_to_doubly_linked_list(tree: BstNode) -> Optional[BstNode]:
+def bst_to_doubly_linked_list_0(tree: BstNode) -> Optional[BstNode]:
     if not tree:
         return None
     dummy = previous = BstNode()
@@ -25,6 +26,21 @@ def bst_to_doubly_linked_list(tree: BstNode) -> Optional[BstNode]:
     result = dummy.right
     result.left = None
     return result
+
+def bst_to_doubly_linked_list(tree: BstNode) -> Optional[BstNode]:
+    HeadAndTail = namedtuple('HeadAndTail', ('head', 'tail'))
+    def helper(tree: BstNode) -> HeadAndTail:
+        if not tree:
+            return HeadAndTail(None, None)
+        left, right = helper(tree.left), helper(tree.right)
+        if left.tail:
+            left.tail.right = tree
+        tree.left = left.tail
+        tree.right = right.head
+        if right.head:
+            right.head.left = tree
+        return HeadAndTail(left.head or tree, right.tail or tree)
+    return helper(tree).head
 
 
 @enable_executor_hook
