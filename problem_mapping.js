@@ -2860,7 +2860,7 @@ problem_mapping = {
                 "total": 474
             },
             "Python: bst_merge.py": {
-                "passed": 0,
+                "passed": 474,
                 "total": 474
             }
         },
