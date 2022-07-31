@@ -9,8 +9,19 @@ Rect = collections.namedtuple('Rect', ('left', 'right', 'height'))
 
 
 def compute_skyline(buildings: List[Rect]) -> List[Rect]:
-    # TODO - you fill in here.
-    return []
+    min_left = min(building.left for building in buildings)
+    max_right = max(building.right for building in buildings)
+    heights = [0] * (max_right - min_left + 1)
+    for building in buildings:
+        for i in range(building.left, building.right + 1):
+            heights[i - min_left] = max(heights[i - min_left], building.height)
+    left = 0
+    result = []
+    for i in range(1, len(heights)):
+        if heights[i] != heights[i - 1]:
+            result.append(Rect(left + min_left, i + min_left - 1, heights[i - 1]))
+            left = i
+    return result + [Rect(left + min_left, max_right, heights[-1])]
 
 
 @enable_executor_hook
