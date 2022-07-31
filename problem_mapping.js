@@ -2902,7 +2902,7 @@ problem_mapping = {
                 "total": 1001
             },
             "Python: count_inversions.py": {
-                "passed": 0,
+                "passed": 1001,
                 "total": 1001
             }
         },
