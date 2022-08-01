@@ -2944,7 +2944,7 @@ problem_mapping = {
                 "total": 501
             },
             "Python: maximum_subarray_in_circular_array.py": {
-                "passed": 0,
+                "passed": 501,
                 "total": 501
             }
         },

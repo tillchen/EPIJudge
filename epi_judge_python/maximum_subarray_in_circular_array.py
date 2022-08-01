@@ -1,11 +1,17 @@
 from typing import List
 
 from test_framework import generic_test
+from typing import Callable
 
 
 def max_subarray_sum_in_circular(A: List[int]) -> int:
-    # TODO - you fill in here.
-    return 0
+    def find_optimal_subarray(f: Callable) -> int:
+        current_optimum = result = 0
+        for x in A:
+            current_optimum = f(x, x + current_optimum)
+            result = f(result, current_optimum)
+        return result
+    return max(find_optimal_subarray(max), sum(A) - find_optimal_subarray(min))
 
 
 if __name__ == '__main__':
