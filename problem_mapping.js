@@ -2958,7 +2958,7 @@ problem_mapping = {
                 "total": 3829
             },
             "Python: max_safe_height.py": {
-                "passed": 0,
+                "passed": 3829,
                 "total": 3829
             }
         },
