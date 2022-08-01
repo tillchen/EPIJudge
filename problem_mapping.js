@@ -2930,7 +2930,7 @@ problem_mapping = {
                 "total": 200
             },
             "Python: defective_jugs.py": {
-                "passed": 0,
+                "passed": 200,
                 "total": 200
             }
         },
