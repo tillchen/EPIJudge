@@ -3068,7 +3068,7 @@ problem_mapping = {
                 "total": 201
             },
             "Python: arbitrage.py": {
-                "passed": 0,
+                "passed": 201,
                 "total": 201
             }
         }
