@@ -4,8 +4,14 @@ from test_framework import generic_test
 
 
 def max_square_submatrix(A: List[List[bool]]) -> int:
-    # TODO - you fill in here.
-    return 0
+    pre = [0] * len(A[0])
+    max_side = 0
+    for row in A:
+        for j, v in enumerate(row[1:], 1):
+            row[j] *= min(pre[j - 1], pre[j], row[j - 1]) + 1
+        max_side = max(max_side, max(row))
+        pre = row
+    return max_side**2
 
 
 if __name__ == '__main__':

@@ -2980,7 +2980,7 @@ problem_mapping = {
                 "total": 100
             },
             "Python: max_square_submatrix.py": {
-                "passed": 0,
+                "passed": 101,
                 "total": 101
             },
             "Python: max_submatrix.py": {
