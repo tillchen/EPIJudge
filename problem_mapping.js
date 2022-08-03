@@ -2707,7 +2707,7 @@ problem_mapping = {
             },
             "Python: copy_posting_list.py": {
                 "passed": 32,
-                "total": 34
+                "total": 32
             }
         },
         "24.11 Compute the longest substring with matching parens": {
