@@ -2998,7 +2998,7 @@ problem_mapping = {
                 "total": 11
             },
             "Python: huffman_coding.py": {
-                "passed": 0,
+                "passed": 11,
                 "total": 11
             }
         },
