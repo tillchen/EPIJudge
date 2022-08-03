@@ -3040,7 +3040,7 @@ problem_mapping = {
                 "total": 102
             },
             "Python: longest_subarray_with_sum_constraint.py": {
-                "passed": 0,
+                "passed": 102,
                 "total": 102
             }
         },
