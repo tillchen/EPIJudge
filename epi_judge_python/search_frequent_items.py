@@ -1,12 +1,15 @@
 from typing import Iterator, List
 
 from test_framework import generic_test, test_utils
+from collections import defaultdict
 
 
 # Finds the candidates which may occur > n / k times.
 def search_frequent_items(k: int, stream: Iterator[str]) -> List[str]:
-    # TODO - you fill in here.
-    return []
+    x_to_frequency = defaultdict(int)
+    for x in stream:
+        x_to_frequency[x] += 1
+    return [x for x, frequency in x_to_frequency.items() if frequency > sum(x_to_frequency.values()) / k]
 
 
 def search_frequent_items_wrapper(k, stream):
